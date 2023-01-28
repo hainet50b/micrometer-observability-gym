@@ -17,7 +17,7 @@ public class LoggingObservationHandler implements ObservationHandler<UserContext
     }
 
     @Override
-    public void onEvent(final Observation.Event event, UserContext context) {
+    public void onEvent(Observation.Event event, UserContext context) {
         System.out.println("onEvent: " + context);
         System.out.println("Event: " + event);
     }
@@ -38,7 +38,7 @@ public class LoggingObservationHandler implements ObservationHandler<UserContext
     }
 
     @Override
-    public boolean supportsContext(final Observation.Context context) {
+    public boolean supportsContext(Observation.Context context) {
         return true;
     }
 }

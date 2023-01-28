@@ -6,7 +6,7 @@ import io.micrometer.observation.Observation;
 public class GlobalUserObservationConvention implements GlobalObservationConvention<UserContext> {
 
     @Override
-    public boolean supportsContext(final Observation.Context context) {
+    public boolean supportsContext(Observation.Context context) {
         return context instanceof UserContext;
     }
 
