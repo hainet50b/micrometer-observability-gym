@@ -6,7 +6,9 @@ import io.micrometer.observation.ObservationHandler;
 public class LoggingObservationHandler implements ObservationHandler<UserContext> {
     @Override
     public void onStart(UserContext context) {
-        System.out.println("onStart: " + (UserContext) context);
+        System.out.println("onStart: " + context);
+        System.out.println("UserContext.id: " + context.getId());
+        System.out.println("UserContext.name: " + context.getName());
     }
 
     @Override

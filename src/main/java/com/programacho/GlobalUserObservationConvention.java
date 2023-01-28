@@ -12,6 +12,6 @@ public class GlobalUserObservationConvention implements GlobalObservationConvent
 
     @Override
     public String getName() {
-        return "global.programacho.operation";
+        return "global.user.operation";
     }
 }

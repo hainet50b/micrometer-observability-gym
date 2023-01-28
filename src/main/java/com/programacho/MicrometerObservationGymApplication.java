@@ -8,6 +8,7 @@ public class MicrometerObservationGymApplication {
         ObservationRegistry registry = ObservationRegistry.create();
         registry.observationConfig().observationHandler(new LoggingObservationHandler());
         registry.observationConfig().observationConvention(new GlobalUserObservationConvention());
+        registry.observationConfig().observationFilter(new UserObservationFilter());
         registry.observationConfig().observationPredicate((name, context) -> {
             return name.contains("programacho");
         });
