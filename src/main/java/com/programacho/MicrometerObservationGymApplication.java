@@ -3,6 +3,7 @@ package com.programacho;
 import brave.Tracing;
 import brave.propagation.StrictCurrentTraceContext;
 import brave.sampler.Sampler;
+import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.observation.DefaultMeterObservationHandler;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
@@ -56,10 +57,11 @@ public class MicrometerObservationGymApplication {
     }
 
     private static void withMicrometerApi() {
-        SimpleMeterRegistry meterRegistry = new SimpleMeterRegistry();
+        MeterRegistry meterRegistry = new SimpleMeterRegistry();
 
         ObservationRegistry observationRegistry = ObservationRegistry.create();
         observationRegistry.observationConfig().observationHandler(
+                // DefaultMeterObservationHandlerでObservationRegistryにMeterRegistryを登録する。
                 new DefaultMeterObservationHandler(meterRegistry)
         );
 
@@ -87,10 +89,12 @@ public class MicrometerObservationGymApplication {
 
         brave.Tracer tracer = tracing.tracer();
 
+        // Zipkinにトレースデータを送信しない最低限のTracerBridgeを生成する。
         Tracer tracerBridge = new BraveTracer(tracer, traceContextBridge, new BraveBaggageManager());
 
         ObservationRegistry observationRegistry = ObservationRegistry.create();
         observationRegistry.observationConfig().observationHandler(
+                // DefaultTracingObservationHandlerでObservationRegistryにTracerを登録する。
                 new DefaultTracingObservationHandler(tracerBridge)
         );
 
