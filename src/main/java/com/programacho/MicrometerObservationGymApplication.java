@@ -32,12 +32,13 @@ public class MicrometerObservationGymApplication {
 
     private static void micrometerObservationApi() {
         ObservationRegistry registry = ObservationRegistry.create();
-        registry.observationConfig().observationHandler(new LoggingObservationHandler());
-        registry.observationConfig().observationConvention(new GlobalUserObservationConvention());
-        registry.observationConfig().observationFilter(new UserObservationFilter());
-        registry.observationConfig().observationPredicate((name, context) -> {
-            return name.contains("programacho");
-        });
+        registry.observationConfig()
+                .observationHandler(new LoggingObservationHandler())
+                .observationConvention(new GlobalUserObservationConvention())
+                .observationFilter(new UserObservationFilter())
+                .observationPredicate((name, context) -> {
+                    return name.contains("programacho");
+                });
 
         Observation.Context context = new UserContext("hainet50b", "Haine Takano").put("programacho.key", "programacho.value");
 
@@ -96,8 +97,6 @@ public class MicrometerObservationGymApplication {
         Observation observation = Observation.start("programacho.operation", observationRegistry);
 
         try (Observation.Scope scope = observation.openScope()) {
-            sleep(1_000);
-
             printTraceContext(tracerBridge.currentTraceContext().context());
         } finally {
             observation.stop();
