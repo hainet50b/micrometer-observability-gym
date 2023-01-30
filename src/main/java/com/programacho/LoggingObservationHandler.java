@@ -8,7 +8,7 @@ public class LoggingObservationHandler implements ObservationHandler<UserContext
     public void onStart(UserContext context) {
         System.out.println("onStart: " + context);
         System.out.println("UserContext.id: " + context.getId());
-        System.out.println("UserContext.name: " + context.getName());
+        System.out.println("UserContext.username: " + context.getUsername());
     }
 
     @Override

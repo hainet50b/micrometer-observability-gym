@@ -7,7 +7,7 @@ public class UserObservationFilter implements ObservationFilter {
 
     @Override
     public Observation.Context map(Observation.Context context) {
-        context.put("user.key", "user.value");
+        context.put("filter.key", "filter.value");
 
         return context;
     }
